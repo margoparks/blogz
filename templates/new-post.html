@@ -7,9 +7,9 @@
 <form action="/newpost" method="post" id="newpost">
     <label for="name">
         Blog Title:
-        <input type="text" name="name" id="name" value="{{title}}" />
+        <input type="text" name="title" id="name" value="{{title}}" />
     </label>
     <input type="submit" value="Submit" />
 </form>
-<textarea name="post" form="newpost" value = "{{body}}"> Enter text here... </textarea>
+<textarea name="body" form="newpost" value = "{{body}}" > Enter text here... </textarea>
 {% endblock %}

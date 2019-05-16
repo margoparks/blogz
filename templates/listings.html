@@ -3,14 +3,21 @@
 {% block content %}
 <h2> Blogs </h2>
 
-{% if tasks|length == 0 %}
+{% if blogs|length == 0 %}
 <p>No tasks yet</p>
 {% else %}
+   {% for blog in blogs %}
     <ul>
-        {% for blog in blogs %}
-        <li>{{blog.name}}</li>
-        {% endfor %}
+        <li>
+            <div> 
+                    <h5> {{blog.title}} </h5> 
+                    {{blog.body}}
+                    <hr />
+            </div>
+            
+        </li>
     </ul>
+    {% endfor %}
 {% endif %}
 
 

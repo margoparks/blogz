@@ -23,7 +23,7 @@ class Blog(db.Model):
 def index():
     
     blogs = Blog.query.filter_by().all()
-    
+    print(len(blogs))
     return render_template('listings.html', name = 'Home Blog',
      blogs = blogs)
 
@@ -37,7 +37,7 @@ def new_post():
         db.session.add(new_blog)
         db.session.commit()
 
-        return redirect('/')
+        return redirect('/blog')
     else:
         return render_template('new-post.html', name = 'New Post')
 

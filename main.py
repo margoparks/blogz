@@ -41,10 +41,9 @@ def new_post():
         new_blog=Blog(blog_title, blog_body)
         db.session.add(new_blog)
         db.session.commit()
-        # TODO - create a method to pass new entry id into redirect
-        a = new_blog.id
-        
-        return redirect("./blog?id={{a}}")
+    
+        blog = Blog.query.filter_by().all()
+        return redirect("./blog?id=" + str(new_blog.id))
     else:
         return render_template('new-post.html', name = 'New Post')
 

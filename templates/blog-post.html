@@ -4,7 +4,16 @@
 <div class="blog">
     <h1> {{blog.title}} </h1>
     <p> {{blog.body }} </p>
+    
+</div >
+<div class = "users">
+    {% for user in users %}
+        <h6> Written by <a href="./blog?user={{user.id}}"> {{user.username}} </a>  </h6>
+    {% endfor %}
 </div>
+    
+    
+
 
     
 

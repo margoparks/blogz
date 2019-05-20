@@ -2,17 +2,32 @@
 
 {% block content %}
 
-<h1>Add New Post! </h1>
+<h1> Create New Post! </h1>
 
-<form action="/newpost" method="post" id="newpost">
-    <label for="name">
-        Blog Title:
-        <input type="text" name="title" id="name" value="{{title}}" required/>
-    </label>
-    <input type="number" name="id" value="{{id}}" style="display: none">
-    <input type="submit" value="Submit" />
-</form>
-<textarea name="body" form="newpost" value = "{{body}}" required> Enter text here... </textarea>
+<div class= "container" >
+    <form action="/newpost" method="post" id="newpost">
+        <div class="row">
+            <div class="col-25"
+                <label for="name"> Blog Title: </label>
+            </div>
+            <div class="col-75" >
+                    <input type="text" name="title" id="name" value="{{title}}" required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for = "body"> Create a blog entry (200 char. max) </label>
+            </div>
+            <div class="col-75">
+                <textarea id="body" name="body" value = "{{body}}" placeholder="Write something..." style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <input type="number" name="id" value="{{id}}" style="display: none">
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
 
+</div>
 
 {% endblock %}

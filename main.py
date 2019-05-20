@@ -24,8 +24,7 @@ def index():
     id = request.args.get("id")
     if not id:
         blogs = Blog.query.filter_by().all()
-        return render_template('listings.html', name = 'Home Blog',
-     blogs = blogs)
+        return render_template('listings.html', name = 'Home Blog', blogs = blogs)
     else:
         blog = Blog.query.get(id)
         return render_template('blog-post.html', blog = blog)

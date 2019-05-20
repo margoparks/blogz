@@ -1,22 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2> Home  </h2>
+<h1> Home </h1>
 
 {% if blogs|length == 0 %}
 <p>No tasks yet</p>
 {% else %}
    {% for blog in blogs %}
+   <div class="listings">
     <ul>
-        <li>
-            <div> 
-                    <header> <h2> <a href ="./blog?id={{blog.id}}" > {{blog.title}} </a>  </h2> </header> 
+        <div class="list">
+            <li>
+                <div class= "title"> 
+                    <header> <h2> <a href ="./blog?id={{blog.id}}" > {{blog.title}} </a>  </h2> </header>
+                </div>
+                <div class="body">
                     {{blog.body}}
+                </div>  
                     <hr />
-            </div>
+        </div>
             
         </li>
     </ul>
+    </div>
     {% endfor %}
 {% endif %}
 

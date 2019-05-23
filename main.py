@@ -99,26 +99,27 @@ def logout():
 @app.route('/blog', methods=['POST', 'GET'])
 def blog():
     id = request.args.get("id")
-    user = request.args.get("user")
-
     
 
-    if not id:
-        blogs = Blog.query.filter_by().all()
-        return render_template('listings.html', name = 'Blogz', blogs = blogs)
-    elif user:
-        owner = User.query.filter_by(username = session['username']).first()
-        users = User.query.get(user)
-        blog = Blog.query.filter_by().all()
-        return render_template('singleUser.html')
-    else:
+    if id:
         blog = Blog.query.get(id)
         users = Blog.query.filter_by().all()
+        user = User.query.filter_by().all()
         #TODO - get the hyperlink to author to become visible 
-        return render_template('blog-post.html', blog = blog, users = users)
+        return render_template('blog-post.html', blog = blog, users = users, user = user)      
+    if 'user' in request.args:
+        user = request.args.get("user")
+        users = User.query.get(user)
+        blogs = Blog.query.filter_by(owner = users)
+        return render_template('singleUser.html', name = "User's Blogz" , blogs = blogs)
+    else:
+        blogs = Blog.query.filter_by().all()
+        return render_template('listings.html', name = 'Blogz', blogs = blogs)
+        
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+
     users = User.query.filter_by().all()
     return render_template('index.html', name='Home', users = users)
 

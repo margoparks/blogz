@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> Single </h1>
+
 {% for blog in blogs %}
+<h1> Single {{blog.owner}} Blogz </h1>
 <ul> 
      <li> {{blog.title}} </li>
      <li> {{blog.body}} </li>

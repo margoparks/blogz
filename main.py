@@ -55,11 +55,13 @@ def register():
         verify = request.form['verify']
         if verify_space (username):
             flash("Username cannot contain blanks")
+            return render_template('register.html')
         elif verify_space (password):
             flash("Password cannot contain blanks")
             return render_template('register.html')
         elif password != verify:
             flash("Password does not match")
+            return render_template('register.html')
 
         existing_user = User.query.filter_by(username=username).first()
         if not existing_user:
@@ -67,7 +69,6 @@ def register():
             db.session.add(new_user)
             db.session.commit()
             session['username'] = username
-            # TODO -Remember the user
             return redirect('/newpost')
         else:
             flash("This username already exists")
@@ -84,10 +85,17 @@ def login():
             session['username'] = username
             flash("Logged in to Blogz")
             return redirect('/newpost')
-        else:
-            #TODO create flash messages for validate password
-            #TODO create flash messages for validate username
-            return '<h1> Error! </h1>'
+        elif user and user.password != password:
+            flash("Invalid password")
+            return render_template('login.html', name = "Login")
+        elif user and user.username != username:
+            flash("Invalid username")
+            return render_template('login.html', name = "Login")
+        elif not user:
+            flash("This user does not exist. Please register for an account")
+            return render_template('login.html')
+
+    session['username'] = username
     return render_template('login.html')
 
 @app.route('/logout')
@@ -114,7 +122,8 @@ def blog():
         return render_template('singleUser.html', name = "User's Blogz" , blogs = blogs)
     else:
         blogs = Blog.query.filter_by().all()
-        return render_template('listings.html', name = 'Blogz', blogs = blogs)
+        user = User.query.filter_by().all()
+        return render_template('listings.html', name = 'Blogz', blogs = blogs, user = user )
         
 
 @app.route('/', methods=['POST', 'GET'])

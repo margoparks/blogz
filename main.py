@@ -95,7 +95,7 @@ def login():
             flash("This user does not exist. Please register for an account")
             return render_template('login.html')
 
-    session['username'] = username
+    
     return render_template('login.html')
 
 @app.route('/logout')
@@ -113,13 +113,12 @@ def blog():
         blog = Blog.query.get(id)
         users = Blog.query.filter_by().all()
         user = User.query.filter_by().all()
-        #TODO - get the hyperlink to author to become visible 
         return render_template('blog-post.html', blog = blog, users = users, user = user)      
     if 'user' in request.args:
-        user = request.args.get("user")
+        user = request.args.get('user')
         users = User.query.get(user)
         blogs = Blog.query.filter_by(owner = users)
-        return render_template('singleUser.html', name = "User's Blogz" , blogs = blogs)
+        return render_template('singleUser.html', name = "User's Blogz" , blogs = blogs, users = users)
     else:
         blogs = Blog.query.filter_by().all()
         user = User.query.filter_by().all()
